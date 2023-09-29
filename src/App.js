@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <header className="header">
-        <h1 className="h1-searchbar">Fish Visualizer</h1>
+        <h1 className="h1-searchbar">Fish Behavior Visualizer</h1>
       </header>
       <div className="main-components">
         <div className='right-section'>

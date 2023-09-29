@@ -1,63 +1,52 @@
 import React from "react";
 import { MapContainer, TileLayer, Popup, CircleMarker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { useState} from 'react';
+import FishMarker from "./FishMarker";
 
 export default function WebMap() {
-  const center = [48.69, -122.56];
-
-  // const uncollected_Icon = new L.Icon({
-  //   iconUrl: require("./uncollected_fish.png"),
-  //   iconSize: [35, 45]
-  // })
-
-  // var circle = L.circle([51.508, -0.11], {
-  //   color: 'red',
-  //   fillColor: '#f03',
-  //   fillOpacity: 0.5,
-  //   radius: 500
-  //   })
+  const origin = [48.714167, -121.131111];
 
   const markers = [
     {
-      position: [48.7, -122.56],
-      tag_code: "3DD.003BC95F8A",
+      position: [48.714308284759525,-121.13127436384724],
+      tag_code: "1",
       species: "Steelhead",
       at_code: "n/a",
-      release_date: "3/25/2019"
+      release_date: "3/25/2019",
+      collected_status: true
     },
     {
-      position: [48.68, -122.55],
-      tag_code: "3DD.003BC95F8A",
-      species: "Steelhead",
+      position: [48.7134,-121.12127436384724],
+      tag_code: "2",
+      species: "Coho",
       at_code: "n/a",
-      release_date: "3/25/2019"
+      release_date: "3/25/2019",
+      collected_status: false
     },
     {
-      position: [48.65, -122.56],
-      tag_code: "3DD.003BC95F8A",
+      position: [48.713, -121.13],
+      tag_code: "3",
       species: "Steelhead",
       at_code: "n/a",
-      release_date: "3/25/2019"
+      release_date: "3/25/2019",
+      collected_status: true
     }
   ]
 
-
-  
   return (
     <MapContainer
-      center={center}
-      zoom={13}
+      center={origin}
+      zoom={20}
       style={{ width: "100xw", height: "100vh" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-
       {markers.map(marker => (
-        <CircleMarker center={marker.position} fillColor="blue">
-          <Popup>PIT Tag Code: {marker.tag_code} <br/>Species: {marker.species} <br/>AT Code: {marker.at_code} <br/> Release Date: {marker.release_date}</Popup>        
-        </CircleMarker>
+              <FishMarker position={marker.position} collected_status={marker.collected_status} at_code={marker.at_code}PIT_code={marker.tag_code} species = {marker.species} release_date={marker.release_date}/>
+              
       ))}
     </MapContainer>
   );
