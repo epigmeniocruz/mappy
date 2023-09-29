@@ -37,7 +37,7 @@ export default function WebMap() {
   return (
     <MapContainer
       center={origin}
-      zoom={20}
+      zoom={25}
       style={{ width: "100xw", height: "100vh" }}
     >
       <TileLayer
@@ -46,7 +46,6 @@ export default function WebMap() {
       />
       {markers.map(marker => (
               <FishMarker position={marker.position} collected_status={marker.collected_status} at_code={marker.at_code}PIT_code={marker.tag_code} species = {marker.species} release_date={marker.release_date}/>
-              
       ))}
     </MapContainer>
   );
