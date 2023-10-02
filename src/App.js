@@ -10,15 +10,14 @@ function App() {
   return (
     <div className="App">
       <div className="App-header">
-      <div className="filter-button"><button>Filter fish</button></div>
         <h1>Fish Behavior Visualizer</h1>
-       
-      <div className="main-components">
-        <div className='right-section'>
+        <div className = 'filter-form'>
+       <FishDataFilter /> 
+       </div>
+       </div>
+      <div className="map-component">
         <WebMap />
-        </div>
       </div>
-    </div>
     </div>
   );
 }
