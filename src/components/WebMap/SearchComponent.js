@@ -5,12 +5,15 @@ export default function SearchComponent({ onSearch }) {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = () => {
-    // Make sure searchQuery is not empty before triggering search
-    if (searchQuery.trim() !== "") {
-      onSearch(searchQuery);
+    // Trim the search query and pass it to the parent component
+    const trimmedQuery = searchQuery.trim();
+    if (trimmedQuery !== "") {
+      onSearch(trimmedQuery);
+    } else {
+      // If the search query is empty, pass an empty string to reset the search
+      onSearch("");
     }
   };
-
   return (
     <div>
       <div className="filter-form">
