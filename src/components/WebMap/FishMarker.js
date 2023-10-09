@@ -1,12 +1,21 @@
 import React from "react";
 import { CircleMarker, Popup } from "react-leaflet";
 import PropTypes from "prop-types";
+import "./FishMarker.css";
 
 function determineColor(collected_status) {
   if (collected_status) {
     return "blue";
   } else {
     return "red";
+  }
+}
+
+function determineCollectionStatus(collected_status) {
+  if (collected_status) {
+    return "YES";
+  } else {
+    return "NO";
   }
 }
 
@@ -27,13 +36,23 @@ function FishMarker(props) {
       color={"black"}
       fillOpacity={0.5}
     >
-      <Popup>
+      <Popup className="message">
         {" "}
-        Timestamp: {props.date_time} <br />
-        AT Code: {props.AT_code} <br />
-        PIT Code: {props.PIT_code} <br />
-        Species: {props.species} <br />
-        Release Date: {props.release_date}
+        <b>Timestamp:</b> {props.date_time} <br />
+        <b>AT Code:</b> {props.AT_code} <br />
+        <b>PIT Code:</b> {props.PIT_code} <br />
+        <b>Species:</b> {props.species} <br />
+        <b>Release Date:</b> {props.release_date} <br />
+        <b>Collected: </b>
+        {determineCollectionStatus(props.collected_status)}
+        {props.collected_status && (
+          <>
+            <br />
+            <b>Detection time: </b> {props.detection_time}
+            <br />
+            <b>Antenna Group Name: </b> {props.antenna_group_name}
+          </>
+        )}
       </Popup>
     </CircleMarker>
   );
@@ -49,6 +68,8 @@ FishMarker.propTypes = {
   lat: PropTypes.string,
   collected_status: PropTypes.bool,
   release_data: PropTypes.string,
+  detection_time: PropTypes.string,
+  antenna_group_name: PropTypes.string,
 };
 
 export default FishMarker;
