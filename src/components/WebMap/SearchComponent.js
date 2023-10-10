@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./SearchComponent.css";
+import { AiOutlineSearch } from "react-icons/ai";
 
 export default function SearchComponent({ onSearch }) {
   const [searchQuery, setSearchQuery] = useState("");

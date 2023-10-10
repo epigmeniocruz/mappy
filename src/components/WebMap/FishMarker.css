@@ -1,0 +1,10 @@
+h2 {
+    margin: 0.30em;
+    padding-top: 0.8em;
+    text-align: center;
+
+}
+.message {
+    font-size: 12pt;
+    line-height: 1.8vh;
+}

@@ -1,6 +1,7 @@
-import React from "react";
+import { useState } from "react";
 import { CircleMarker, Popup } from "react-leaflet";
 import PropTypes from "prop-types";
+import "./FishMarker.css";
 
 // Function that takes in a fish record's collected status and returns a color based on collected (true) or not collected false).
 function determineColor(collected_status) {
@@ -9,7 +10,7 @@ function determineColor(collected_status) {
 
 // Function that takes in a fish record's collected status and returns a more user-friendly, simple yes or no.
 function determineCollectionStatus(collected_status) {
-  return collected_status ? "Yes" : "No";
+  return collected_status ? "Collected" : "Not collected";
 }
 
 // Function that takes in long and lat values and stores them as a pair in an array called position
@@ -33,33 +34,73 @@ function formatDateTime(dateTimeString, withTime = true) {
   }
 }
 
+function setShow(collected_status) {
+  if (collected_status) {
+    return false;
+  }
+}
+
 function FishMarker(props) {
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const routeCoordinates = [];
+
+  const animateMarker = () => {
+    setIsAnimating(true);
+
+    const interval = setInterval(() => {
+      // move the marker position here
+    }, 500);
+
+    setTimeout(() => {
+      clearInterval(interval);
+      setIsAnimating(false);
+    }, 5000);
+  };
+
   return (
     <CircleMarker
       center={convertToCoordinate(props.long, props.lat)}
       fillColor={determineColor(props.collected_status)}
-      radius={6}
+      radius={8}
       weight={0.5}
       color={"black"}
       fillOpacity={0.5}
     >
-      <Popup className="message">
-        {" "}
-        <b>First Timestamp:</b> {formatDateTime(props.date_time)} <br />
-        <b>AT Code:</b> {props.AT_code} <br />
-        <b>PIT Code:</b> {props.PIT_code} <br />
-        <b>Species:</b> {props.species} <br />
-        <b>Release Date:</b> {formatDateTime(props.release_date, false)} <br />
-        <b>Collected: </b>
-        {determineCollectionStatus(props.collected_status)}
-        {props.collected_status && (
-          <>
+      <Popup>
+        <div className="message">
+          <h3>PIT Code: {props.PIT_code}</h3>
+          <p>
+            <b>Timestamp:</b> {formatDateTime(props.date_time)}{" "}
+            <button className="question-mark"></button>
             <br />
-            <b>Detection time: </b> {formatDateTime(props.detection_time)}
+            <b>AT Code:</b> {props.AT_code} <br />
+            <b>PIT Code:</b> {props.PIT_code} <br />
+            <b>Species:</b> {props.species} <br />
+            <b>Release Date:</b> {formatDateTime(props.release_date, false)}
             <br />
-            <b>Antenna Group Name: </b> {props.antenna_group_name}
-          </>
-        )}
+            <b>Status: </b> {determineCollectionStatus(props.collected_status)}
+          </p>
+          {props.collected_status && (
+            <div>
+              <details>
+                <summary>Show collection details</summary>
+                <b>Detection time: </b> {formatDateTime(props.detection_time)}
+                <br />
+                <b>Antenna Group Name: </b> {props.antenna_group_name}
+              </details>
+            </div>
+          )}
+          <br />
+          <button
+            className="animate"
+            onClick={animateMarker}
+            disabled={isAnimating}
+          >
+            {isAnimating ? "Animating..." : "Animate"}
+          </button>
+        </div>
       </Popup>
     </CircleMarker>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import "./SpeciesFilter.css";
 
 function SpeciesFilter({ speciesOptions, onSelect }) {
   const handleSelectChange = (event) => {
@@ -8,7 +9,7 @@ function SpeciesFilter({ speciesOptions, onSelect }) {
 
   return (
     <select onChange={handleSelectChange}>
-      <option value="">Select Species</option>
+      <option value="">Filter by Species</option>
       {speciesOptions.map((species) => (
         <option key={species} value={species}>
           {species}

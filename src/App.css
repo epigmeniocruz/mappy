@@ -3,10 +3,10 @@
   display: flex;
   flex-direction: column;
   height: 90vh;
-  background-color: #285cac;
+  background-color: #2C5496;
 
+    box-sizing: border-box;
 }
-
 
 .App-header {
   min-height: 10vh;
