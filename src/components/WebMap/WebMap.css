@@ -1,11 +1,16 @@
 .error-message{
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: bold;
+    font-size: 20px;
     background-color: #2C5496;
     color: white;
     padding: 3px;
+
 }
 .filter {
-    display: flexbox;
+    margin-left:10vw;
+    display: flex;
+    flex-direction: row;
+    column-gap: 25px;
     background-color: #2C5496;
+
 }

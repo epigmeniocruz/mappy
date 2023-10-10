@@ -72,8 +72,7 @@ function FishMarker(props) {
         <div className="message">
           <h3>PIT Code: {props.PIT_code}</h3>
           <p>
-            <b>Timestamp:</b> {formatDateTime(props.date_time)}{" "}
-            <button className="question-mark"></button>
+            <b>Timestamp:</b> {formatDateTime(props.date_time)}
             <br />
             <b>AT Code:</b> {props.AT_code} <br />
             <b>PIT Code:</b> {props.PIT_code} <br />
@@ -83,14 +82,12 @@ function FishMarker(props) {
             <b>Status: </b> {determineCollectionStatus(props.collected_status)}
           </p>
           {props.collected_status && (
-            <div>
-              <details>
-                <summary>Show collection details</summary>
-                <b>Detection time: </b> {formatDateTime(props.detection_time)}
-                <br />
-                <b>Antenna Group Name: </b> {props.antenna_group_name}
-              </details>
-            </div>
+            <details>
+              <summary>Show collection details</summary>
+              <b>Detection time: </b> {formatDateTime(props.detection_time)}
+              <br />
+              <b>Antenna Group Name: </b> {props.antenna_group_name}
+            </details>
           )}
           <br />
           <button

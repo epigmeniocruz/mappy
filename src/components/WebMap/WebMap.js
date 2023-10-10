@@ -77,13 +77,13 @@ export default function WebMap() {
   return (
     <div>
       <div className="filter">
+        <SearchComponent onSearch={setSearchQuery} />
         <SpeciesFilter
           speciesOptions={["Steelhead", "Cutthroat Trout", "Chinook", "Coho"]}
           onSelect={setSelectedSpecies}
         />
-        <SearchComponent onSearch={setSearchQuery} />
-        {errorMessage ? <p className="error-message">{errorMessage}</p> : null}
       </div>
+      {errorMessage ? <p className="error-message">{errorMessage}</p> : null}
       <MapContainer
         center={origin}
         zoom={15}

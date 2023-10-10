@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./SearchComponent.css";
-import { AiOutlineSearch } from "react-icons/ai";
+import Input from "@mui/material/Input";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import { InputBase, Paper } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import { Icon } from "leaflet";
 
 export default function SearchComponent({ onSearch }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -18,16 +25,45 @@ export default function SearchComponent({ onSearch }) {
   return (
     <div>
       <div className="filter-form">
-        <input
+        <Paper
+          component="form"
+          sx={{
+            border: 1,
+            p: "2px 4px",
+            display: "flex",
+            width: 1000,
+          }}
+        >
+          <InputBase
+            sx={{
+              ml: 1,
+              flex: 1,
+              fontSize: 20,
+              backgroundColor: "white",
+            }}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search by PIT Code"
+            value={searchQuery}
+          />
+          <IconButton
+            type="button"
+            sx={{ backgroundColor: "white" }}
+            aria-label="search"
+            onClick={handleSearch}
+          >
+            <SearchIcon />
+          </IconButton>
+        </Paper>
+        {/* <input
           className="general-input"
           type="text"
-          value={searchQuery}
+          // value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search by PIT Code"
-        />
-        <button className="submit" onClick={handleSearch}>
+        /> */}
+        {/* <button className="submit" onClick={handleSearch}>
           Search
-        </button>
+        </button> */}
       </div>
     </div>
   );

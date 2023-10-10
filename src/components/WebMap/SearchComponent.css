@@ -10,13 +10,13 @@
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-.submit:hover {
+/* .submit:hover {
     color: #265397 ;
     background-color: rgb(236, 236, 236);
     cursor: pointer;
-}
+} */
 
-input{
+/* input{
     font-size: inherit;
     width: 60%;
     margin: 5px 0;
@@ -24,10 +24,10 @@ input{
     border-radius: 0.25em;
     padding: 0.25em 0.5em;
     font-size: 1.25rem;
- }
+ } */
 
  .filter-form {
-    display: flexbox;
     background-color: #2C5496;
     padding-bottom: 2vh;
+    align-content: center;
  }
