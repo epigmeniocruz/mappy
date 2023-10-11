@@ -1,0 +1,41 @@
+.legend-marker-blue {
+    background-color: blue;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.legend-marker-red {
+    background-color: red;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.legend-item {
+    padding: 10px;
+}
+
+
+
+  .check {
+    height: 26px;
+    width: 26px;
+    display: inline-block;
+  }
+
+  .legend {
+    border: 2px solid black;
+    width: 10%;
+    font-size: 1.25rem;
+    
+
+  }

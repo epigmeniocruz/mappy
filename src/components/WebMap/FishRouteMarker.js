@@ -25,12 +25,12 @@
 //       previousPosition={prevPos}
 //       duration={1000}
 //     >
-//       <Popup> Timestamp: {props.date_time} <br/> 
+//       <Popup> Timestamp: {props.date_time} <br/>
 //       PIT Code: {props.PIT_code} <br/>
 //       Species: {props.species} <br/>
-//       AT Code: {props.AT_code} <br/> 
+//       AT Code: {props.AT_code} <br/>
 //       Release Date: {props.release_date}
-//       </Popup>        
+//       </Popup>
 //     </LeafletTrackingMarker>
 //   );
 // }
@@ -42,7 +42,7 @@
 //     species: PropTypes.string,
 //     long: PropTypes.string,
 //     lat: PropTypes.string,
-//     collected_status: PropTypes.bool,
+//     collection_status: PropTypes.bool,
 //     release_data: PropTypes.string
 // };
 

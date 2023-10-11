@@ -8,6 +8,8 @@ import FishMarker from "./FishMarker";
 import SpeciesFilter from "./SpeciesFilter";
 import SearchComponent from "./SearchComponent";
 import "./WebMap.css";
+import Legend from "./Legend";
+import CollectionFilter from "./CollectionFilter";
 
 const origin = [48.714167, -121.131111];
 
@@ -61,6 +63,7 @@ export default function WebMap() {
             );
           }
         });
+
       // When searchQuery is empty, trigger the API get ALL fish call so that searchButton acts like a reset button
     } else if (searchQuery.trim() === "" && selectedSpecies === "") {
       setFishData(originalFishData);
@@ -75,36 +78,38 @@ export default function WebMap() {
   }, [originalFishData, searchQuery, selectedSpecies]);
 
   return (
-    <div>
+    <div className="parent-filter">
       <div className="filter">
         <SearchComponent onSearch={setSearchQuery} />
         <SpeciesFilter
           speciesOptions={["Steelhead", "Cutthroat Trout", "Chinook", "Coho"]}
           onSelect={setSelectedSpecies}
         />
+        <CollectionFilter />
       </div>
       {errorMessage ? <p className="error-message">{errorMessage}</p> : null}
       <MapContainer
         center={origin}
-        zoom={15}
-        maxZoom={20}
-        style={{ width: "100vw", height: "100vh" }}
+        zoom={17}
+        maxZoom={22}
+        style={{ width: "100%", height: "85vh" }}
       >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          // url=  "https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg"
         />
         {fishData.map((marker) => (
           <FishMarker
             key={marker.PIT_code}
-            long={marker.X}
-            lat={marker.Y}
+            lat={marker.X}
+            long={marker.Y}
             date_time={marker.date_time}
             AT_code={marker.AT_code}
             PIT_code={marker.PIT_code}
             species={marker.species}
             release_date={marker.release_date}
-            collected_status={marker.collection_status}
+            collection_status={marker.collection_status}
             detection_time={marker.detection_time}
             antenna_group_name={marker.antenna_group_name}
           />

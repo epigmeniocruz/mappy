@@ -1,16 +1,17 @@
 .error-message{
     font-weight: bold;
     font-size: 20px;
-    background-color: #2C5496;
+    background-color: #2256A0;
     color: white;
-    padding: 3px;
+    padding: 5px;
 
 }
 .filter {
-    margin-left:10vw;
+    margin-left:20%;
     display: flex;
     flex-direction: row;
     column-gap: 25px;
-    background-color: #2C5496;
-
+    background-color: #2256A0;
+    box-sizing: border-box;
+    padding: 1%;
 }

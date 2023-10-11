@@ -9,7 +9,7 @@ function SpeciesFilter({ speciesOptions, onSelect }) {
 
   return (
     <select onChange={handleSelectChange}>
-      <option value="">Filter by Species</option>
+      <option value="">Species Type</option>
       {speciesOptions.map((species) => (
         <option key={species} value={species}>
           {species}

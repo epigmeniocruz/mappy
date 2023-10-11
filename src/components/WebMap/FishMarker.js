@@ -2,15 +2,16 @@ import { useState } from "react";
 import { CircleMarker, Popup } from "react-leaflet";
 import PropTypes from "prop-types";
 import "./FishMarker.css";
+import QuestionBox from "./QuestionBox";
 
 // Function that takes in a fish record's collected status and returns a color based on collected (true) or not collected false).
-function determineColor(collected_status) {
-  return collected_status ? "blue" : "red";
+function determineColor(collection_status) {
+  return collection_status ? "blue" : "red";
 }
 
 // Function that takes in a fish record's collected status and returns a more user-friendly, simple yes or no.
-function determineCollectionStatus(collected_status) {
-  return collected_status ? "Collected" : "Not collected";
+function determineCollectionStatus(collection_status) {
+  return collection_status ? "Collected" : "Not collected";
 }
 
 // Function that takes in long and lat values and stores them as a pair in an array called position
@@ -34,8 +35,8 @@ function formatDateTime(dateTimeString, withTime = true) {
   }
 }
 
-function setShow(collected_status) {
-  if (collected_status) {
+function setShow(collection_status) {
+  if (collection_status) {
     return false;
   }
 }
@@ -61,27 +62,35 @@ function FishMarker(props) {
 
   return (
     <CircleMarker
-      center={convertToCoordinate(props.long, props.lat)}
-      fillColor={determineColor(props.collected_status)}
-      radius={8}
+      center={convertToCoordinate(props.lat, props.long)}
+      fillColor={determineColor(props.collection_status)}
+      radius={10}
       weight={0.5}
       color={"black"}
       fillOpacity={0.5}
     >
       <Popup>
         <div className="message">
-          <h3>PIT Code: {props.PIT_code}</h3>
           <p>
-            <b>Timestamp:</b> {formatDateTime(props.date_time)}
+            <b>PIT Code:</b> {props.PIT_code}{" "}
+            <QuestionBox
+              text={"Passive integrated transponder (PIT) tag code"}
+            />
             <br />
-            <b>AT Code:</b> {props.AT_code} <br />
-            <b>PIT Code:</b> {props.PIT_code} <br />
+            <b>AT Code:</b> {props.AT_code}
+            <QuestionBox text={"Acoustic telemetry (AT) tag code"} />
+            <br />
+            <b>Timestamp:</b> {formatDateTime(props.date_time)}
+            <QuestionBox
+              text={"The timestamp of the fish's first recorded position."}
+            />
+            <br />
             <b>Species:</b> {props.species} <br />
             <b>Release Date:</b> {formatDateTime(props.release_date, false)}
             <br />
-            <b>Status: </b> {determineCollectionStatus(props.collected_status)}
+            <b>Status: </b> {determineCollectionStatus(props.collection_status)}
           </p>
-          {props.collected_status && (
+          {props.collection_status && (
             <details>
               <summary>Show collection details</summary>
               <b>Detection time: </b> {formatDateTime(props.detection_time)}
@@ -95,7 +104,7 @@ function FishMarker(props) {
             onClick={animateMarker}
             disabled={isAnimating}
           >
-            {isAnimating ? "Animating..." : "Animate"}
+            {isAnimating ? "Animating..." : "Track where this fish has been"}
           </button>
         </div>
       </Popup>
@@ -109,9 +118,9 @@ FishMarker.propTypes = {
   PIT_code: PropTypes.string.isRequired,
   AT_code: PropTypes.string,
   species: PropTypes.string,
-  long: PropTypes.string,
   lat: PropTypes.string,
-  collected_status: PropTypes.bool,
+  long: PropTypes.string,
+  collection_status: PropTypes.bool,
   release_date: PropTypes.string,
   detection_time: PropTypes.string,
   antenna_group_name: PropTypes.string,

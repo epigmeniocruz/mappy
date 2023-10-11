@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./SearchComponent.css";
-import Input from "@mui/material/Input";
-import InputAdornment from "@mui/material/InputAdornment";
-import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import { InputBase, Paper } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { Icon } from "leaflet";
 
 export default function SearchComponent({ onSearch }) {
   const [searchQuery, setSearchQuery] = useState("");
