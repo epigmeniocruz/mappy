@@ -81,10 +81,10 @@ function FishMarker(props) {
             // Move the marker position here based on the retrieved coordinates
             if (index < parsedCoordinates.length) {
               const [parsedX, parsedY] = parsedCoordinates[index];
-              setPosition([parsedX, parsedY]); // Update marker position as an array of numbers
+              setPosition([parsedX, parsedY]);
               index++;
             } else {
-              // Stop the animation when all coordinates are covered
+              // Once the coordinates list is complete, the animation will stop
               clearInterval(interval);
               setIsAnimating(false);
             }
@@ -134,7 +134,11 @@ function FishMarker(props) {
             </div>
             <div>
               <b>Release Date:</b> {formatDateTime(props.release_date, false)}
-              <QuestionBox text={"The date when the fish was released."} />
+              <QuestionBox
+                text={
+                  "The date on which the fish was released in the reservoir."
+                }
+              />
             </div>
             <div>
               <b>Status: </b>{" "}
