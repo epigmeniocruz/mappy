@@ -63,13 +63,12 @@ function FishMarker(props) {
     if (!isAnimating) {
       setIsAnimating(true);
 
-      // Make the API call for FishPosition records based on AT_code
+      // GET for FishPosition records based on AT_code
       axios
         .get(`http://127.0.0.1:8000/api/fishpositions/${props.AT_code}/`)
         .then((response) => {
           const data = response.data;
 
-          // Take only X and Y values from each object in the response data
           const parsedCoordinates = data.map(({ X, Y }) => [
             parseFloat(X),
             parseFloat(Y),
@@ -130,7 +129,7 @@ function FishMarker(props) {
             </div>
             <div>
               <b>Species:</b> {props.species}
-              <QuestionBox text={"The fish's species type."} />
+              <QuestionBox text={"The species of fish."} />
             </div>
             <div>
               <b>Release Date:</b> {formatDateTime(props.release_date, false)}

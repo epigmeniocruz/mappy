@@ -7,7 +7,7 @@ export default function SearchComponent({ onSearch }) {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = () => {
-    // Trim the search query and pass it to the parent component
+    // Trim the search query and pass it to WebMap
     const trimmedQuery = searchQuery.trim();
     if (trimmedQuery !== "") {
       onSearch(trimmedQuery);
