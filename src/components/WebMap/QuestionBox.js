@@ -1,16 +1,15 @@
 import React from "react";
-import HelpIcon from "@mui/icons-material/Help";
+import HelpOutline from "@mui/icons-material/HelpOutline";
 import IconButton from "@mui/material/IconButton";
 import PropTypes from "prop-types";
 import Tooltip from "@mui/material/Tooltip";
-import "./QuestionBox.css";
 
 export default function QuestionBox(props) {
   return (
-    <div>
+    <div style={{ display: "inline-block" }}>
       <Tooltip title={props.text} arrow>
-        <IconButton className="question-box-icon" color="info" size="small">
-          <HelpIcon />
+        <IconButton className="question-box-icon" color="info">
+          <HelpOutline style={{ fontSize: "17" }} />
         </IconButton>
       </Tooltip>
     </div>

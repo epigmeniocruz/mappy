@@ -1,27 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./CollectionFilter.css";
 
-export default function CollectionFilter() {
+export default function CollectionFilter({ onFilterChange }) {
+  const [filters, setFilters] = useState({
+    collected: false,
+    notCollected: false,
+  });
+
+  useEffect(() => {
+    onFilterChange(filters);
+  }, [filters, onFilterChange]);
+
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: checked,
+    }));
+  };
+
   return (
-    <div class="legend">
-      <div class="legend-item">
-        <div class="legend-marker-blue"></div>
+    <div className="legend">
+      <div className="legend-item">
+        <div className="legend-marker-blue"></div>
         Collected
-        <input class="check" type="checkbox" />
+        <input
+          className="check"
+          type="checkbox"
+          name="collected"
+          checked={filters.collected}
+          onChange={handleCheckboxChange}
+        />
       </div>
-      <div class="legend-item">
-        <div class="legend-marker-red"></div>
+      <div className="legend-item">
+        <div className="legend-marker-red"></div>
         Not Collected
-        <input class="check" type="checkbox" />
+        <input
+          className="check"
+          type="checkbox"
+          name="notCollected"
+          checked={filters.notCollected}
+          onChange={handleCheckboxChange}
+        />
       </div>
     </div>
   );
-}
-
-{
-  /* <select value="collection_status">
-      <option value="">Collection Status</option>
-      <option value="true">Collected</option>
-      <option value="false">Not collected</option>
-    </select> */
 }

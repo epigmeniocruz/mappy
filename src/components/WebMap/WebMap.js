@@ -8,7 +8,6 @@ import FishMarker from "./FishMarker";
 import SpeciesFilter from "./SpeciesFilter";
 import SearchComponent from "./SearchComponent";
 import "./WebMap.css";
-import Legend from "./Legend";
 import CollectionFilter from "./CollectionFilter";
 
 const origin = [48.714167, -121.131111];
@@ -18,7 +17,19 @@ export default function WebMap() {
   const [fishData, setFishData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [selectedSpecies, setSelectedSpecies] = useState("");
+  const [selectedSpecies, setSelectedSpecies] = useState([]);
+  const [markerPosition, setMarkerPosition] = useState([]);
+  const [collectionFilters, setCollectionFilters] = useState({
+    collected: true,
+    notCollected: true,
+  });
+
+  const handleFilterChange = (filters) => {
+    setCollectionFilters(filters);
+  };
+  const moveMarker = (newPosition) => {
+    setMarkerPosition(newPosition);
+  };
 
   useEffect(() => {
     // Fetch fish data from API and store it in both originalFishData and fishData
@@ -39,43 +50,33 @@ export default function WebMap() {
     // Reset error message before making a new API call
     setErrorMessage("");
 
-    // When searchQuery is not empty, trigger the API filter by PITcode call
-    if (searchQuery.trim() !== "") {
-      axios
-        .get(`http://127.0.0.1:8000/api/fish/${searchQuery}/`)
-        .then((response) => {
-          // Transform single JSON object into an array to pass into FishMarker
-          const data = Array.isArray(response.data)
-            ? response.data
-            : [response.data];
-          setFishData(data);
-        })
-        .catch((error) => {
-          // Return user friendly message if 404 response
-          if (error.response && error.response.status === 404) {
-            setErrorMessage(
-              "No fish record found; please try another PIT code."
-            );
-          } else {
-            console.error("Error fetching data:", error);
-            setErrorMessage(
-              "Error fetching fish data. Please try again later."
-            );
-          }
-        });
-
-      // When searchQuery is empty, trigger the API get ALL fish call so that searchButton acts like a reset button
-    } else if (searchQuery.trim() === "" && selectedSpecies === "") {
+    // When searchQuery is empty, selectedSpecies is empty, and both collection filters are unchecked, reset fishData to originalFishData
+    if (
+      searchQuery.trim() === "" &&
+      selectedSpecies.length === 0 &&
+      !collectionFilters.collected &&
+      !collectionFilters.notCollected
+    ) {
       setFishData(originalFishData);
+      return; // Exit the useEffect early to avoid unnecessary API calls
     }
-    // When selectedSpecies is not empty, filter the original data by species
-    else if (selectedSpecies !== "") {
-      const filteredData = originalFishData.filter(
-        (fish) => fish.species === selectedSpecies
+
+    // Filter the original data by species, search query, and collection status
+    const filteredData = originalFishData.filter((fish) => {
+      const matchesSearchQuery =
+        searchQuery.trim() === "" || fish.PIT_code.includes(searchQuery.trim());
+      const matchesSelectedSpecies =
+        selectedSpecies.length === 0 || selectedSpecies.includes(fish.species);
+      const matchesCollectedStatus =
+        (!collectionFilters.collected || fish.collection_status) &&
+        (!collectionFilters.notCollected || !fish.collection_status);
+      return (
+        matchesSearchQuery && matchesSelectedSpecies && matchesCollectedStatus
       );
-      setFishData(filteredData);
-    }
-  }, [originalFishData, searchQuery, selectedSpecies]);
+    });
+
+    setFishData(filteredData);
+  }, [originalFishData, searchQuery, selectedSpecies, collectionFilters]);
 
   return (
     <div className="parent-filter">
@@ -85,7 +86,7 @@ export default function WebMap() {
           speciesOptions={["Steelhead", "Cutthroat Trout", "Chinook", "Coho"]}
           onSelect={setSelectedSpecies}
         />
-        <CollectionFilter />
+        <CollectionFilter onFilterChange={handleFilterChange} />
       </div>
       {errorMessage ? <p className="error-message">{errorMessage}</p> : null}
       <MapContainer
@@ -97,7 +98,6 @@ export default function WebMap() {
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          // url=  "https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg"
         />
         {fishData.map((marker) => (
           <FishMarker
@@ -112,6 +112,7 @@ export default function WebMap() {
             collection_status={marker.collection_status}
             detection_time={marker.detection_time}
             antenna_group_name={marker.antenna_group_name}
+            moveMarker={moveMarker}
           />
         ))}
       </MapContainer>

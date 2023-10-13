@@ -12,6 +12,7 @@ function App() {
       <div className="map-component">
         <WebMap />
       </div>
+      <p className="bottom-text">2023 NINA-TUYEN TRAN FOR FOUR PEAKS</p>
     </div>
   );
 }

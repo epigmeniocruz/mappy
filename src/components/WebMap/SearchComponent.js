@@ -24,14 +24,15 @@ export default function SearchComponent({ onSearch }) {
           component="form"
           sx={{
             border: 1,
-            p: "2px 4px",
+            borderRadius: 0,
+            p: "3px",
             display: "flex",
-            width: 1000,
+            width: 600,
+            height: 30,
           }}
         >
           <InputBase
             sx={{
-              ml: 1,
               flex: 1,
               fontSize: 20,
               backgroundColor: "white",
@@ -49,16 +50,6 @@ export default function SearchComponent({ onSearch }) {
             <SearchIcon />
           </IconButton>
         </Paper>
-        {/* <input
-          className="general-input"
-          type="text"
-          // value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search by PIT Code"
-        /> */}
-        {/* <button className="submit" onClick={handleSearch}>
-          Search
-        </button> */}
       </div>
     </div>
   );
