@@ -8,7 +8,6 @@ import FishMarker from "./FishMarker";
 import SpeciesFilter from "./SpeciesFilter";
 import SearchComponent from "./SearchComponent";
 import CollectionFilter from "./CollectionFilter";
-import Legend from "./Legend";
 
 const origin = [48.714167, -121.131111];
 
