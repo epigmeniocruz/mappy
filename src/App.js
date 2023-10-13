@@ -1,7 +1,7 @@
 // import map from './map.svg';
 import "./App.css";
 // import FishDataFilter from "./components/FishData/FishDataFilter";
-import WebMap from "./components/WebMap/WebMap";
+import WebMap from "./components/WebMap";
 
 function App() {
   return (
@@ -12,7 +12,9 @@ function App() {
       <div className="map-component">
         <WebMap />
       </div>
-      <p className="bottom-text">2023 NINA-TUYEN TRAN FOR FOUR PEAKS</p>
+      <p className="bottom-text">
+        2023 NINA-TUYEN TRAN DEVELOPED FOR FOUR PEAKS ENVIRONMENTAL
+      </p>
     </div>
   );
 }

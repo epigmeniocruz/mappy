@@ -1,26 +1,24 @@
 .legend {
     background-color: white;
-    width: 15%;
-    font-size: 1.25rem; 
-    border: 1px solid var(--select-border);
-    border-radius: 0.25em;
-    padding: 0.5em;
+    height: 50px;
+    font-weight: bold;
+    text-align: left;
+    min-width: 160px;
   }
 .legend-marker-blue {
     background-color: blue;
-    width: 15px;
-    height: 15px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     display: inline-block;
     margin-right: 5px;
     border: 2px solid black;
-
 }
 
 .legend-marker-red {
     background-color: red;
-    width: 15px;
-    height: 15px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     display: inline-block;
     margin-right: 5px;
@@ -28,15 +26,12 @@
 }
 
 .legend-item {
-    padding: 5%;
-    
+    padding: 4px;    
 }
 
-
-
   .check {
-    height: 20px;
-    width: 20px;
+    height: 15px;
+    width: 15px;
     cursor: pointer;
-    display: inline-block;
+    margin-left: 10px;
   }

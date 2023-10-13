@@ -8,11 +8,11 @@ import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 
 function SpeciesFilter({ speciesOptions, onSelect }) {
-  const [selectedSpecies, setSelectedSpecies] = useState([]); // Initialize selectedSpecies as a state variable
+  const [selectedSpecies, setSelectedSpecies] = useState([]);
 
   const handleSelectChange = (event) => {
-    setSelectedSpecies(event.target.value); // Update the selected species in the state
-    onSelect(event.target.value); // Send the selected species (array) to the parent component
+    setSelectedSpecies(event.target.value);
+    onSelect(event.target.value);
   };
 
   return (
@@ -20,16 +20,14 @@ function SpeciesFilter({ speciesOptions, onSelect }) {
       <FormControl
         className="form"
         sx={{
-          m: 1,
-          width: 200,
-          display: "flex",
-          borderRadius: 0,
+          margin: 0,
+          minWidth: 200,
         }}
       >
         <InputLabel
           className="form"
           id="demo-multiple-checkbox-label"
-          sx={{ color: "black" }}
+          sx={{ color: "black", fontSize: 18 }}
         >
           Filter by species
         </InputLabel>
@@ -38,7 +36,12 @@ function SpeciesFilter({ speciesOptions, onSelect }) {
           value={selectedSpecies}
           onChange={handleSelectChange}
           renderValue={(selected) => selected.join(", ")}
-          sx={{ backgroundColor: "white" }}
+          sx={{
+            backgroundColor: "white",
+            borderRadius: 0,
+            borderColor: "black",
+            height: 50,
+          }}
         >
           {speciesOptions.map((species) => (
             <MenuItem key={species} value={species}>
@@ -49,15 +52,6 @@ function SpeciesFilter({ speciesOptions, onSelect }) {
         </Select>
       </FormControl>
     </div>
-
-    // <select onChange={handleSelectChange}>
-    //   <option value="">Species Type</option>
-    //   {speciesOptions.map((species) => (
-    //     <option key={species} value={species}>
-    //       {species}
-    //     </option>
-    //   ))}
-    // </select>
   );
 }
 

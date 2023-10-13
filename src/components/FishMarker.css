@@ -10,6 +10,7 @@
 
 .animate {
     font-size: 12pt;
+    cursor: pointer;
 }
 
 .message-text{

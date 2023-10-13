@@ -63,6 +63,7 @@ function FishMarker(props) {
     if (!isAnimating) {
       setIsAnimating(true);
 
+      // Make the API call for FishPosition records based on AT_code
       axios
         .get(`http://127.0.0.1:8000/api/fishpositions/${props.AT_code}/`)
         .then((response) => {
